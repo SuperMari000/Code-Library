@@ -49,6 +49,10 @@ int tarjanDFS(int u, int pe) {
             compSz += tarjanDFS(v, e ^ 1);
             lw[u] = min(lw[u], lw[v]);
 
+            if (lw[v] >= dfsTime[u] && (~pe || dfsTime[v] > dfsTime[u] + 1)) {
+                isArt[u] = vid;
+            }
+
             if (lw[v] > dfsTime[u]) {
                 isBridge[e] = isBridge[e ^ 1] = vid;
             }
