@@ -11,15 +11,16 @@ struct SparseTable {
     int n;
     SparseTable(vector<int> &_arr) : arr(_arr) {
         n = (int)_arr.size();
-        int lg = log2(n) + 1;
-        vector<vector<int> > sp(lg, vector<int>(n));
+        
         LOG = vector<int>(n + 1);
-
         LOG[0] = LOG[1] = 0;
 
-        for (int i = 2; i < n + 1; ++i) {
+        for (int i = 2; i <= n; ++i) {
             LOG[i] += LOG[i - 1] + !(i & (i - 1));
         }
+
+        int LG = LOG[n];
+        vector<vector<int> > sp(LG + 1, vector<int>(n));
 
         build();
     }
